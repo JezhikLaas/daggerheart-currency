@@ -6,6 +6,15 @@
         "name": "Weltwährung",
         "label": "Währung einrichten",
         "hint": "Lege die Stufen und Umrechnungskurse der Währung dieser Welt fest."
+      },
+      "Setup": {
+        "name": "Einrichtung prüfen",
+        "label": "Einrichtungsassistent öffnen",
+        "hint": "Prüft, ob das Daggerheart-System und der Store für dieses Modul eingestellt sind, und korrigiert das auf Wunsch."
+      },
+      "StartupCheck": {
+        "name": "Einrichtung beim Start prüfen",
+        "hint": "Öffnet den Einrichtungsassistenten für die Spielleitung, wenn ein Problem gefunden wird."
       }
     },
     "Config": {
@@ -52,7 +61,8 @@
         "coin": {
           "label": "Münzen",
           "abbreviation": "M"
-        }
+        },
+        "currency": "Gold"
       },
       "decimal": {
         "name": "Gold / Silber / Kupfer",
@@ -67,7 +77,8 @@
         "copper": {
           "label": "Kupfer",
           "abbreviation": "K"
-        }
+        },
+        "currency": "Münzen"
       },
       "lsd": {
         "name": "Pfund / Schilling / Penny",
@@ -82,7 +93,8 @@
         "penny": {
           "label": "Pence",
           "abbreviation": "d"
-        }
+        },
+        "currency": "Sterling"
       }
     },
     "Wallet": {
@@ -90,6 +102,41 @@
       "inputHint": "Zahl eingeben, oder +n / -n zum Hinzufügen bzw. Abziehen. Fehlende Beträge werden automatisch aus höheren Stufen gewechselt.",
       "invalidInput": "Bitte eine ganze Zahl eingeben, optional mit + oder -.",
       "insufficientFunds": "Nicht genug Geld."
+    },
+    "Setup": {
+      "title": "Kampagnenwährung – Einrichtung",
+      "intro": "Dieses Modul braucht einige Einstellungen im Daggerheart-System und im Daggerheart-Store. Die Korrekturen ändern diese Einstellungen direkt.",
+      "fix": "Korrigieren",
+      "fixAll": "Alle korrigieren",
+      "refresh": "Erneut prüfen",
+      "allOk": "Alles ist eingerichtet.",
+      "startupCheck": "Diesen Assistenten beim Start öffnen, wenn ein Problem gefunden wird",
+      "fixFailed": "„{check}“ konnte nicht korrigiert werden: {error}",
+      "andMore": " und {count} weitere",
+      "Checks": {
+        "coinsEnabled": {
+          "title": "„Münzen“ im System aktiv",
+          "detail": "Das System blendet den gesamten Währungsblock aus, wenn „Münzen“ in seinen Homebrew-Einstellungen deaktiviert ist."
+        },
+        "legacyWealth": {
+          "title": "Kein Geld mehr in Handvoll, Beuteln oder Truhen",
+          "detail": "{count} Akteur(e) haben noch Geld in den alten Stufen, das dieses Modul nicht anzeigt: {names}. Eine Migration folgt in der nächsten Version."
+        },
+        "legacyTiersDisabled": {
+          "title": "Handvoll, Beutel und Truhen im System deaktiviert",
+          "detail": "Diese Stufen nutzt das Modul nicht, sie sollten deaktiviert sein.",
+          "blocked": "Erst deaktivierbar, wenn niemand mehr Geld darin hat (siehe oben)."
+        },
+        "labelsSynced": {
+          "title": "Systemnamen passen zur Weltwährung",
+          "detail": "Währungsname, Münz-Bezeichnung und Icon des Systems erscheinen z. B. im Übergabedialog und im Store und sollten zur Basisstufe passen."
+        },
+        "storeMode": {
+          "title": "Store-Währungsmodus „Disabled“",
+          "detail": "In jedem anderen Modus rechnet der Store mit festen Kursen (1/10/100/1000) und umgeht die Weltwährung.",
+          "inactive": "Daggerheart: Store ist nicht aktiv."
+        }
+      }
     }
   }
 }

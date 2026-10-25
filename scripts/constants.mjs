@@ -36,7 +36,11 @@ export const SETTINGS = Object.freeze({
   /** World setting holding the CurrencyDefinition. */
   CURRENCY: "currency",
   /** Settings menu opening the currency config dialog. */
-  CURRENCY_MENU: "currencyMenu"
+  CURRENCY_MENU: "currencyMenu",
+  /** Settings menu opening the setup assistant. */
+  SETUP_MENU: "setupMenu",
+  /** World setting: open the setup assistant on start when problems are found. */
+  STARTUP_CHECK: "startupCheck"
 });
 
 /** Custom hooks fired by this module. */
@@ -48,5 +52,6 @@ export const HOOKS = Object.freeze({
 /** Template paths. */
 export const TEMPLATES = Object.freeze({
   CURRENCY_CONFIG: `modules/${MODULE_ID}/templates/currency-config.hbs`,
-  WALLET: `modules/${MODULE_ID}/templates/wallet.hbs`
+  WALLET: `modules/${MODULE_ID}/templates/wallet.hbs`,
+  SETUP_ASSISTANT: `modules/${MODULE_ID}/templates/setup-assistant.hbs`
 });

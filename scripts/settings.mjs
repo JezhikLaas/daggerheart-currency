@@ -6,6 +6,7 @@ import { HOOKS, I18N_PREFIX, MODULE_ID, SETTINGS } from "./constants.mjs";
 import { CurrencyDefinition } from "./currency/currency-definition.mjs";
 import { CurrencyPresets } from "./currency/currency-presets.mjs";
 import { CurrencyConfig } from "./apps/currency-config.mjs";
+import { SetupAssistant } from "./apps/setup-assistant.mjs";
 
 export class ModuleSettings {
   /**
@@ -28,6 +29,29 @@ export class ModuleSettings {
       type: CurrencyConfig,
       restricted: true
     });
+
+    game.settings.registerMenu(MODULE_ID, SETTINGS.SETUP_MENU, {
+      name: `${I18N_PREFIX}.Settings.Setup.name`,
+      label: `${I18N_PREFIX}.Settings.Setup.label`,
+      hint: `${I18N_PREFIX}.Settings.Setup.hint`,
+      icon: "fa-solid fa-stethoscope",
+      type: SetupAssistant,
+      restricted: true
+    });
+
+    game.settings.register(MODULE_ID, SETTINGS.STARTUP_CHECK, {
+      name: `${I18N_PREFIX}.Settings.StartupCheck.name`,
+      hint: `${I18N_PREFIX}.Settings.StartupCheck.hint`,
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true
+    });
+  }
+
+  /** @returns {boolean} Whether to open the setup assistant on start when problems exist. */
+  static get startupCheck() {
+    return game.settings.get(MODULE_ID, SETTINGS.STARTUP_CHECK);
   }
 
   /** @returns {CurrencyDefinition} The configured world currency. */

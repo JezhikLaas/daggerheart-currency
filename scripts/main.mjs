@@ -2,12 +2,14 @@
  * Entry point. Registers hooks only; all logic lives in dedicated classes.
  * @module main
  */
-import { MODULE_ID, UPSTREAM } from "./constants.mjs";
+import { HOOKS, MODULE_ID, UPSTREAM } from "./constants.mjs";
 import { Logger } from "./logger.mjs";
 import { ModuleSettings } from "./settings.mjs";
 import { CurrencyMath } from "./currency/currency-math.mjs";
 import { CurrencyPresets } from "./currency/currency-presets.mjs";
 import { SheetIntegration } from "./sheet/sheet-integration.mjs";
+import { SetupChecks } from "./setup/setup-checks.mjs";
+import { SetupAssistant } from "./apps/setup-assistant.mjs";
 
 /**
  * Public API, exposed as `game.modules.get("daggerheart-currency").api`.
@@ -18,6 +20,11 @@ class CurrencyApi {
 
   /** Built-in presets. */
   CurrencyPresets = CurrencyPresets;
+
+  /** Open the setup assistant (GM). */
+  openSetupAssistant() {
+    return new SetupAssistant().render({ force: true });
+  }
 
   /** @returns {import("./currency/currency-definition.mjs").CurrencyDefinition} The world currency. */
   get currency() {
@@ -46,6 +53,9 @@ Hooks.once("init", () => {
 
   ModuleSettings.register();
   SheetIntegration.init();
+  Hooks.on(HOOKS.CURRENCY_CHANGED, () => {
+    if (game.user.isActiveGM) SetupChecks.syncLabels().catch(err => Logger.error("Label sync failed.", err));
+  });
   game.modules.get(MODULE_ID).api = new CurrencyApi();
   Logger.info("Initialized.");
 });
@@ -53,5 +63,8 @@ Hooks.once("init", () => {
 Hooks.once("ready", async () => {
   if (!isSupportedSystem()) return;
   await SheetIntegration.ready();
+  if (game.user.isActiveGM && ModuleSettings.startupCheck && SetupChecks.hasProblems()) {
+    new SetupAssistant().render({ force: true });
+  }
   Logger.info(`Ready (system ${game.system.version}, currency "${game.i18n.localize(ModuleSettings.currency.name)}").`);
 });

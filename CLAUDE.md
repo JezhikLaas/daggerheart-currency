@@ -78,6 +78,11 @@ scripts/
     currency-presets.mjs        CurrencyPresets: built-in presets (classic, decimal, lsd)
   apps/
     currency-config.mjs         CurrencyConfig: ApplicationV2 GM dialog
+    setup-assistant.mjs         SetupAssistant: ApplicationV2 showing checks + fixes
+  setup/
+    upstream-settings.mjs       UpstreamSettings: the ONLY place touching system/store settings
+    legacy-wealth.mjs           LegacyWealth: finds money left in handfuls/bags/chests
+    setup-checks.mjs            SetupCheck subclasses + SetupChecks registry/runner
   sheet/
     wallet-view.mjs             WalletView: builds the wallet render context
     sheet-integration.mjs       SheetIntegration: partial override + input handling
@@ -124,12 +129,24 @@ tests/                          node:test unit tests for pure logic
   currency drag & drop works (transfers base units).
 - Known limitation: the system's transfer dialog shows the amount in base units.
 
+## Setup checks
+
+- Each check is a `SetupCheck` subclass with static `id`, `evaluate()` → `{status, detail, fixable}`
+  and optional `fix()`. Register new checks in `SetupChecks.ALL`; i18n under
+  `DH_CURRENCY.Setup.Checks.<id>.title|detail`.
+- Only the active GM fixes anything. The assistant opens on `ready` when a check
+  fails and the world setting `startupCheck` is on; also reachable via settings menu
+  and `api.openSetupAssistant()`.
+- Label sync (system currency title, `coins` label/icon ← world currency name and
+  base denomination) runs automatically after the GM changes the currency.
+- Legacy tiers are only disabled once no world actor holds money in them.
+
 ## Roadmap
 
 1. ~~Scaffold~~ (module.json, entry point, i18n, CLAUDE.md)
 2. ~~Currency definition~~: world setting (DataModel) + ApplicationV2 config dialog, presets
 3. ~~Sheet display~~: override `gold.hbs` partial, split view + per-denomination input
-4. Environment checks: warn GM if system homebrew / store mode are not set up as required
+4. ~~Environment checks~~: warn GM if system homebrew / store mode are not set up as required
 5. Migration of existing handfuls/bags/chests into the ledger
 6. Store polish (price multiplier guidance, possible upstream PR for price formatting)
 7. Later: multiple regional currencies (stored in actor flags)

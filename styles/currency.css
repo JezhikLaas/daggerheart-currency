@@ -57,3 +57,38 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Setup assistant */
+.dh-currency-setup__list {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dh-currency-setup__check {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr auto;
+  gap: 0.5rem;
+  align-items: start;
+}
+
+.dh-currency-setup__text p {
+  margin: 0.125rem 0 0;
+  opacity: 0.85;
+}
+
+.dh-currency-setup__icon {
+  margin-top: 0.2rem;
+}
+
+.dh-currency-setup__check--ok .dh-currency-setup__icon { color: var(--color-level-success, #3a8f3a); }
+.dh-currency-setup__check--warning .dh-currency-setup__icon { color: var(--color-level-warning, #c8891a); }
+.dh-currency-setup__check--error .dh-currency-setup__icon { color: var(--color-level-error, #b33a3a); }
+.dh-currency-setup__check--skipped { opacity: 0.6; }
+
+.dh-currency-setup__summary {
+  font-weight: bold;
+}

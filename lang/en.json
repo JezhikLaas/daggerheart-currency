@@ -6,6 +6,15 @@
         "name": "World currency",
         "label": "Configure currency",
         "hint": "Define the denominations and conversion rates of this world's currency."
+      },
+      "Setup": {
+        "name": "Setup check",
+        "label": "Open setup assistant",
+        "hint": "Checks whether the Daggerheart system and the store are configured for this module and fixes it on request."
+      },
+      "StartupCheck": {
+        "name": "Check setup on start",
+        "hint": "Opens the setup assistant for the GM when a problem is found."
       }
     },
     "Config": {
@@ -52,7 +61,8 @@
         "coin": {
           "label": "Coins",
           "abbreviation": "C"
-        }
+        },
+        "currency": "Gold"
       },
       "decimal": {
         "name": "Gold / Silver / Copper",
@@ -67,7 +77,8 @@
         "copper": {
           "label": "Copper",
           "abbreviation": "c"
-        }
+        },
+        "currency": "Coin"
       },
       "lsd": {
         "name": "Pound / Shilling / Penny",
@@ -82,7 +93,8 @@
         "penny": {
           "label": "Pence",
           "abbreviation": "d"
-        }
+        },
+        "currency": "Sterling"
       }
     },
     "Wallet": {
@@ -90,6 +102,41 @@
       "inputHint": "Enter a number, or +n / -n to add or remove. Missing amounts are changed from higher denominations automatically.",
       "invalidInput": "Please enter a whole number, optionally with + or -.",
       "insufficientFunds": "Not enough money."
+    },
+    "Setup": {
+      "title": "Campaign Currency – Setup",
+      "intro": "This module needs a few settings in the Daggerheart system and the Daggerheart Store. Fixes change those settings directly.",
+      "fix": "Fix",
+      "fixAll": "Fix all",
+      "refresh": "Check again",
+      "allOk": "Everything is set up.",
+      "startupCheck": "Open this assistant on start when a problem is found",
+      "fixFailed": "Could not fix \"{check}\": {error}",
+      "andMore": " and {count} more",
+      "Checks": {
+        "coinsEnabled": {
+          "title": "\"Coins\" enabled in the system",
+          "detail": "The system hides the whole currency block when \"Coins\" is disabled in its homebrew settings."
+        },
+        "legacyWealth": {
+          "title": "No money left in handfuls, bags or chests",
+          "detail": "{count} actor(s) still hold money in the old tiers, which this module does not show: {names}. A migration follows in the next version."
+        },
+        "legacyTiersDisabled": {
+          "title": "Handfuls, bags and chests disabled in the system",
+          "detail": "These tiers are not used by this module and should be disabled.",
+          "blocked": "Can only be disabled once nobody holds money in them any more (see above)."
+        },
+        "labelsSynced": {
+          "title": "System names match the world currency",
+          "detail": "The system's currency name, coin label and icon are used e.g. in the transfer dialog and by the store and should match the base denomination."
+        },
+        "storeMode": {
+          "title": "Store currency mode \"Disabled\"",
+          "detail": "In any other mode the store converts money with fixed rates (1/10/100/1000) and bypasses the world currency.",
+          "inactive": "Daggerheart: Store is not active."
+        }
+      }
     }
   }
 }
