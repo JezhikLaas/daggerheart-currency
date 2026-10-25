@@ -59,6 +59,18 @@
   <button type="button" data-action="addDenomination" {{disabled (not canAdd)}}>
     <i class="fa-solid fa-plus" inert></i> {{localize "DH_CURRENCY.Config.add" max=maxDenominations}}
   </button>
+
+  <fieldset class="dh-currency-config__scale">
+    <legend>{{localize "DH_CURRENCY.Config.scale"}}</legend>
+    <div class="form-group">
+      <label for="dh-currency-handful">{{localize "DH_CURRENCY.Config.ruleHandful"}}</label>
+      <div class="form-fields">
+        <input id="dh-currency-handful" type="number" name="ruleHandfulValue" value="{{ruleHandfulValue}}" min="1" step="1" required>
+        <span class="units">{{baseLabel}}</span>
+      </div>
+      <p class="hint">{{localize "DH_CURRENCY.Config.ruleHandfulHint"}}</p>
+    </div>
+  </fieldset>
 </section>
 
 <footer class="form-footer">

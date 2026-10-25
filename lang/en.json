@@ -34,7 +34,10 @@
       "remove": "Remove denomination",
       "newDenomination": "New denomination",
       "save": "Save",
-      "saved": "Currency saved."
+      "saved": "Currency saved.",
+      "scale": "Price scale",
+      "ruleHandful": "1 handful (rules) =",
+      "ruleHandfulHint": "Daggerheart prices are given in handfuls (e.g. in the store's price list). This value converts them into your currency and sets the store's price multiplier. Typical: about the value of a meal and a night at an inn."
     },
     "Errors": {
       "NoDenominations": "The currency needs at least one denomination.",
@@ -135,6 +138,10 @@
           "title": "Store currency mode \"Disabled\"",
           "detail": "In any other mode the store converts money with fixed rates (1/10/100/1000) and bypasses the world currency.",
           "inactive": "Daggerheart: Store is not active."
+        },
+        "storePriceScale": {
+          "title": "Store prices match the price scale",
+          "detail": "The store's price multiplier is {actual} %, the price scale of the world currency needs {expected} %. Prices you set manually per item are not changed."
         }
       }
     },

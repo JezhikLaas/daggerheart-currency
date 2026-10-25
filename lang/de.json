@@ -34,7 +34,10 @@
       "remove": "Stufe entfernen",
       "newDenomination": "Neue Stufe",
       "save": "Speichern",
-      "saved": "Währung gespeichert."
+      "saved": "Währung gespeichert.",
+      "scale": "Preisskala",
+      "ruleHandful": "1 Handvoll (Regelwerk) =",
+      "ruleHandfulHint": "Daggerheart-Preise sind in Handvoll angegeben (z. B. in der Preisliste des Stores). Dieser Wert rechnet sie in deine Währung um und setzt den Preis-Multiplikator des Stores. Üblich: etwa der Preis für eine Mahlzeit und eine Nacht im Gasthaus."
     },
     "Errors": {
       "NoDenominations": "Die Währung braucht mindestens eine Stufe.",
@@ -135,6 +138,10 @@
           "title": "Store-Währungsmodus „Disabled“",
           "detail": "In jedem anderen Modus rechnet der Store mit festen Kursen (1/10/100/1000) und umgeht die Weltwährung.",
           "inactive": "Daggerheart: Store ist nicht aktiv."
+        },
+        "storePriceScale": {
+          "title": "Store-Preise passen zur Preisskala",
+          "detail": "Der Preis-Multiplikator des Stores steht auf {actual} %, die Preisskala der Weltwährung braucht {expected} %. Von Hand gesetzte Einzelpreise werden nicht verändert."
         }
       }
     },

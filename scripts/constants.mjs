@@ -28,7 +28,9 @@ export const UPSTREAM = Object.freeze({
   /** Store setting that controls how it handles currency. */
   STORE_CURRENCY_MODE_SETTING: "currencyMode",
   /** Store currency mode required by this module. */
-  STORE_REQUIRED_MODE: "disabled"
+  STORE_REQUIRED_MODE: "disabled",
+  /** Store setting: global price multiplier in percent (applied to its rule price list). */
+  STORE_PRICE_MODIFIER_SETTING: "priceModifier"
 });
 
 /** Keys of this module's settings. */

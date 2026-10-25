@@ -1,0 +1,47 @@
+# Builds the release assets when a GitHub release is published (tag e.g. v0.2.0):
+# runs the tests, writes version + URLs into module.json, attaches module.json and module.zip.
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Write version and URLs into module.json
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+          REPO_URL: https://github.com/${{ github.repository }}
+        run: |
+          jq --arg version "${TAG#v}" --arg tag "$TAG" --arg repo "$REPO_URL" '
+            .version  = $version
+            | .url      = $repo
+            | .manifest = ($repo + "/releases/latest/download/module.json")
+            | .download = ($repo + "/releases/download/" + $tag + "/module.zip")
+          ' module.json > module.json.tmp
+          mv module.json.tmp module.json
+
+      - name: Package
+        run: |
+          extras=$(ls README.md CHANGELOG.md LICENSE 2>/dev/null || true)
+          zip -r module.zip module.json scripts templates lang styles $extras
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            module.json
+            module.zip

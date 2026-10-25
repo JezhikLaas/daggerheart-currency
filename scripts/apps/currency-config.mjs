@@ -14,7 +14,7 @@ export class CurrencyConfig extends HandlebarsApplicationMixin(ApplicationV2) {
   /**
    * Working copy of the currency source data. Kept in sync with the form on
    * every change, persisted only by the save action.
-   * @type {{name: string, denominations: import("../currency/currency-math.mjs").Denomination[]}}
+   * @type {{name: string, denominations: import("../currency/currency-math.mjs").Denomination[], ruleHandfulValue: number}}
    */
   #draft;
 
@@ -59,6 +59,8 @@ export class CurrencyConfig extends HandlebarsApplicationMixin(ApplicationV2) {
     const { denominations } = this.#draft;
     return Object.assign(context, {
       name: this.#draft.name,
+      ruleHandfulValue: this.#draft.ruleHandfulValue,
+      baseLabel: this.#baseLabel,
       denominations: denominations.map((d, index) => ({ ...d, index })),
       canAdd: denominations.length < CurrencyDefinition.MAX_DENOMINATIONS,
       canRemove: denominations.length > 1,
@@ -75,9 +77,10 @@ export class CurrencyConfig extends HandlebarsApplicationMixin(ApplicationV2) {
    * @param {foundry.applications.ux.FormDataExtended} formData
    */
   static async #onFormChange(_event, _form, formData) {
-    const { name, denominations = {} } = foundry.utils.expandObject(formData.object);
+    const { name, ruleHandfulValue, denominations = {} } = foundry.utils.expandObject(formData.object);
     this.#draft = {
       name: name ?? this.#draft.name,
+      ruleHandfulValue: Number(ruleHandfulValue ?? this.#draft.ruleHandfulValue),
       denominations: Object.entries(denominations)
         .sort(([a], [b]) => Number(a) - Number(b))
         .map(([, d]) => ({ ...d, factor: Number(d.factor) }))
@@ -137,6 +140,11 @@ export class CurrencyConfig extends HandlebarsApplicationMixin(ApplicationV2) {
     await this.close();
   }
 
+  /** @returns {string} Label of the draft's base denomination (factor 1), for hints. */
+  get #baseLabel() {
+    return this.#draft.denominations.find(d => d.factor === 1)?.label ?? "";
+  }
+
   /**
    * Replace i18n keys in name/labels/abbreviations by their translation, so
    * the GM edits real text in the form.
@@ -147,6 +155,7 @@ export class CurrencyConfig extends HandlebarsApplicationMixin(ApplicationV2) {
     const t = text => game.i18n.localize(text);
     return {
       name: t(source.name),
+      ruleHandfulValue: source.ruleHandfulValue,
       denominations: CurrencyMath.sort(source.denominations)
         .map(d => ({ ...d, label: t(d.label), abbreviation: t(d.abbreviation) }))
     };

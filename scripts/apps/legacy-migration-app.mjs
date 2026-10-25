@@ -20,7 +20,7 @@ const LEGACY_LABELS = Object.freeze({
 
 export class LegacyMigrationApp extends HandlebarsApplicationMixin(ApplicationV2) {
   /** @type {import("../migration/legacy-conversion.mjs").LegacyRates} */
-  #rates = { ...LegacyConversion.DEFAULT_RATES };
+  #rates = LegacyConversion.ratesFor(ModuleSettings.currency.ruleHandfulValue);
 
   /** @type {string|null} Validation message for the last rate input. */
   #ratesError = null;

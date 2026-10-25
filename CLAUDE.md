@@ -145,6 +145,22 @@ tests/                          node:test unit tests for pure logic
   base denomination) runs automatically after the GM changes the currency.
 - Legacy tiers are only disabled once no world actor holds money in them.
 
+## Price scale
+
+- `CurrencyDefinition.ruleHandfulValue` = value of one rule handful in base units
+  (presets: classic 10, decimal 10, lsd 12). Rule prices use 10 = 1 handful, so the
+  store multiplier is `ruleHandfulValue * 10` % (`storePriceModifier`).
+- Setup check `storePriceScale` compares/sets the store's `priceModifier`. Not synced
+  automatically: GMs may deliberately deviate (and can disable the startup check).
+- Migration default rates come from `LegacyConversion.ratesFor(ruleHandfulValue)`.
+
+## Release
+
+- `.github/workflows/release.yml`: on a published GitHub release (tag `vX.Y.Z`) it runs
+  `npm test`, writes version/url/manifest/download into `module.json` via jq and
+  attaches `module.json` + `module.zip`. Keep `module.json` URLs empty in the repo.
+- Update `CHANGELOG.md` with every user-visible change.
+
 ## Legacy migration
 
 - Rates = value of one coin/handful/bag/chest in base units (integers ≥ 1),
@@ -165,7 +181,7 @@ tests/                          node:test unit tests for pure logic
 3. ~~Sheet display~~: override `gold.hbs` partial, split view + per-denomination input
 4. ~~Environment checks~~: warn GM if system homebrew / store mode are not set up as required
 5. ~~Migration~~ of existing handfuls/bags/chests into the ledger
-6. Store polish (price multiplier guidance, possible upstream PR for price formatting)
+6. ~~Store polish~~: price scale (`ruleHandfulValue`) + store multiplier check. Open: upstream PR for price formatting
 7. Later: multiple regional currencies (stored in actor flags)
 
 ## Testing

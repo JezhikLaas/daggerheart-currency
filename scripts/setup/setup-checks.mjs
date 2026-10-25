@@ -160,6 +160,23 @@ class StoreModeCheck extends SetupCheck {
   }
 }
 
+/** Store prices are rule prices (10 = 1 handful); scale them to the world currency. */
+class StorePriceScaleCheck extends SetupCheck {
+  static id = "storePriceScale";
+
+  static evaluate() {
+    const actual = UpstreamSettings.storePriceModifier;
+    if (actual === null) return { status: CHECK_STATUS.SKIPPED, detail: i18n("Checks.storeMode.inactive") };
+    const expected = ModuleSettings.currency.storePriceModifier;
+    if (actual === expected) return { status: CHECK_STATUS.OK };
+    return { status: CHECK_STATUS.WARNING, detail: i18n("Checks.storePriceScale.detail", { actual, expected }), fixable: true };
+  }
+
+  static async fix() {
+    await UpstreamSettings.setStorePriceModifier(ModuleSettings.currency.storePriceModifier);
+  }
+}
+
 /**
  * Registry and runner for all checks.
  */
@@ -170,7 +187,8 @@ export class SetupChecks {
     LegacyWealthCheck,
     LegacyTiersDisabledCheck,
     LabelsSyncedCheck,
-    StoreModeCheck
+    StoreModeCheck,
+    StorePriceScaleCheck
   ]);
 
   /**

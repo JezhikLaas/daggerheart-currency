@@ -23,7 +23,13 @@ export class CurrencyDefinition extends foundry.abstract.DataModel {
           icon: new fields.StringField({ required: true, blank: true, initial: "fa-solid fa-coins" }),
           factor: new fields.NumberField({ required: true, nullable: false, integer: true, min: 1, initial: 1 })
         })
-      )
+      ),
+      /**
+       * Price scale: value of one rule "handful" in base units. Rule prices
+       * (e.g. the store's price list, where 10 coins = 1 handful) are multiplied
+       * by ruleHandfulValue / 10.
+       */
+      ruleHandfulValue: new fields.NumberField({ required: true, nullable: false, integer: true, min: 1, initial: 10 })
     };
   }
 
@@ -45,6 +51,11 @@ export class CurrencyDefinition extends foundry.abstract.DataModel {
   /** @returns {import("./currency-math.mjs").Denomination[]} Denominations, highest factor first. */
   get sorted() {
     return CurrencyMath.sort(this.denominations);
+  }
+
+  /** @returns {number} Store price multiplier in percent that matches {@link ruleHandfulValue}. */
+  get storePriceModifier() {
+    return this.ruleHandfulValue * 10;
   }
 
   /** @returns {import("./currency-math.mjs").Denomination} The base denomination (factor 1). */

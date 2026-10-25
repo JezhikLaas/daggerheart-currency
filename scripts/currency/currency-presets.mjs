@@ -31,7 +31,8 @@ const PRESETS = Object.freeze({
       denomination("classic", "bag", "fa-solid fa-sack", 100),
       denomination("classic", "handful", "fa-solid fa-coins", 10),
       denomination("classic", "coin", "fa-solid fa-coin-front", 1)
-    ]
+    ],
+    ruleHandfulValue: 10
   },
   decimal: {
     name: key("decimal.currency"),
@@ -39,7 +40,9 @@ const PRESETS = Object.freeze({
       denomination("decimal", "gold", "fa-solid fa-coins", 100),
       denomination("decimal", "silver", "fa-solid fa-coin", 10),
       denomination("decimal", "copper", "fa-solid fa-coin-front", 1)
-    ]
+    ],
+    /** 1 handful = 1 silver. */
+    ruleHandfulValue: 10
   },
   lsd: {
     name: key("lsd.currency"),
@@ -47,7 +50,9 @@ const PRESETS = Object.freeze({
       denomination("lsd", "pound", "fa-solid fa-sterling-sign", 240),
       denomination("lsd", "shilling", "fa-solid fa-coin", 12),
       denomination("lsd", "penny", "fa-solid fa-coin-front", 1)
-    ]
+    ],
+    /** 1 handful = 1 shilling. */
+    ruleHandfulValue: 12
   }
 });
 
@@ -66,7 +71,7 @@ export class CurrencyPresets {
   /**
    * Get a deep copy of a preset's source data.
    * @param {string} id
-   * @returns {{name: string, denominations: import("./currency-math.mjs").Denomination[]}}
+   * @returns {{name: string, denominations: import("./currency-math.mjs").Denomination[], ruleHandfulValue: number}}
    * @throws {Error} If the preset does not exist.
    */
   static get(id) {

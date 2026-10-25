@@ -35,3 +35,10 @@ describe("LegacyConversion.isAffected", () => {
     assert.equal(LegacyConversion.isAffected({ coins: 0 }, { ...rates, coins: 10 }), false);
   });
 });
+
+describe("LegacyConversion.ratesFor", () => {
+  it("derives rates from the price scale, keeping coins at 1", () => {
+    assert.deepEqual(LegacyConversion.ratesFor(10), { coins: 1, handfuls: 10, bags: 100, chests: 1000 });
+    assert.deepEqual(LegacyConversion.ratesFor(12), { coins: 1, handfuls: 12, bags: 120, chests: 1200 });
+  });
+});

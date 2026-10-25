@@ -25,6 +25,16 @@ export class LegacyConversion {
   static DEFAULT_RATES = Object.freeze({ coins: 1, handfuls: 10, bags: 100, chests: 1000 });
 
   /**
+   * Suggested rates for a world currency: handfuls/bags/chests follow the
+   * price scale, coins stay 1 (see the coin-rate caveat in the dialog).
+   * @param {number} ruleHandfulValue  Value of one rule handful in base units.
+   * @returns {LegacyRates}
+   */
+  static ratesFor(ruleHandfulValue) {
+    return { coins: 1, handfuls: ruleHandfulValue, bags: ruleHandfulValue * 10, chests: ruleHandfulValue * 100 };
+  }
+
+  /**
    * Convert legacy gold into a ledger value.
    * @param {Partial<LegacyGold>} gold    Missing fields count as 0.
    * @param {LegacyRates} rates

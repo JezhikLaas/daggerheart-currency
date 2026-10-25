@@ -52,6 +52,20 @@ export class UpstreamSettings {
     return game.settings.get(UPSTREAM.STORE_ID, UPSTREAM.STORE_CURRENCY_MODE_SETTING);
   }
 
+  /** @returns {number|null} The store's price multiplier in percent, or null if the store is not active. */
+  static get storePriceModifier() {
+    if (!UpstreamSettings.storeActive) return null;
+    return game.settings.get(UPSTREAM.STORE_ID, UPSTREAM.STORE_PRICE_MODIFIER_SETTING);
+  }
+
+  /**
+   * @param {number} percent
+   * @returns {Promise<void>}
+   */
+  static async setStorePriceModifier(percent) {
+    await game.settings.set(UPSTREAM.STORE_ID, UPSTREAM.STORE_PRICE_MODIFIER_SETTING, percent);
+  }
+
   /**
    * @param {string} mode  One of the store's currency modes.
    * @returns {Promise<void>}
