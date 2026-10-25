@@ -1,5 +1,59 @@
 {
   "DH_CURRENCY": {
-    "Title": "Kampagnenwährung"
+    "Title": "Kampagnenwährung",
+    "Settings": {
+      "Currency": {
+        "name": "Weltwährung",
+        "label": "Währung einrichten",
+        "hint": "Lege die Stufen und Umrechnungskurse der Währung dieser Welt fest."
+      }
+    },
+    "Config": {
+      "title": "Kampagnenwährung",
+      "intro": "Das Vermögen eines Charakters wird als ein einziger Betrag in der kleinsten Stufe gespeichert. Die Stufen unten legen nur fest, wie dieser Betrag aufgeteilt und angezeigt wird.",
+      "name": "Name der Währung",
+      "nameHint": "Wird angezeigt, wo die Währung als Ganzes gemeint ist, z. B. „Kronen“.",
+      "preset": "Vorlage",
+      "applyPreset": "Vorlage übernehmen",
+      "applyPresetConfirm": "Alle Stufen durch die gewählte Vorlage ersetzen? Ungespeicherte Änderungen gehen verloren.",
+      "label": "Name",
+      "abbreviation": "Kürzel",
+      "icon": "Icon (Font Awesome)",
+      "factor": "Wert in Basiseinheiten",
+      "factorHint": "Genau eine Stufe muss den Wert 1 haben (die Basiseinheit). Die Werte müssen eindeutige ganze Zahlen sein.",
+      "add": "Stufe hinzufügen (max. {max})",
+      "remove": "Stufe entfernen",
+      "newDenomination": "Neue Stufe",
+      "save": "Speichern",
+      "saved": "Währung gespeichert."
+    },
+    "Errors": {
+      "NoDenominations": "Die Währung braucht mindestens eine Stufe.",
+      "TooManyDenominations": "Eine Währung kann höchstens {max} Stufen haben.",
+      "NoBaseDenomination": "Genau eine Stufe muss den Wert 1 haben (Basiseinheit).",
+      "DuplicateFactor": "Zwei Stufen haben denselben Wert.",
+      "DuplicateId": "Zwei Stufen haben dieselbe Id."
+    },
+    "Presets": {
+      "classic": {
+        "name": "Daggerheart (Regelwerk)",
+        "chest": { "label": "Truhen", "abbreviation": "T" },
+        "bag": { "label": "Beutel", "abbreviation": "B" },
+        "handful": { "label": "Handvoll", "abbreviation": "H" },
+        "coin": { "label": "Münzen", "abbreviation": "M" }
+      },
+      "decimal": {
+        "name": "Gold / Silber / Kupfer",
+        "gold": { "label": "Gold", "abbreviation": "G" },
+        "silver": { "label": "Silber", "abbreviation": "S" },
+        "copper": { "label": "Kupfer", "abbreviation": "K" }
+      },
+      "lsd": {
+        "name": "Pfund / Schilling / Penny",
+        "pound": { "label": "Pfund", "abbreviation": "£" },
+        "shilling": { "label": "Schilling", "abbreviation": "s" },
+        "penny": { "label": "Pence", "abbreviation": "d" }
+      }
+    }
   }
 }

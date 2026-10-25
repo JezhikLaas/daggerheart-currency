@@ -65,15 +65,35 @@ conversion factors (decimal, £/s/d, …).
 ## Layout
 
 ```
-module.json          manifest
+module.json                     manifest
+package.json                    dev tooling only (npm test), never shipped logic
 scripts/
-  main.mjs           entry point: hook registration only, no logic
-  constants.mjs      module id, setting keys, upstream ids
-  logger.mjs         prefixed console logging
-lang/                en.json, de.json
-styles/              module CSS
-templates/           Handlebars templates (added as needed)
+  main.mjs                      entry point: hook registration + public API, no logic
+  constants.mjs                 module id, setting keys, hooks, templates, upstream ids
+  logger.mjs                    prefixed console logging
+  settings.mjs                  ModuleSettings: registration + typed getters/setters
+  currency/
+    currency-math.mjs           CurrencyMath: pure integer split/combine/format (no Foundry globals)
+    currency-definition.mjs     CurrencyDefinition: DataModel of the world setting
+    currency-presets.mjs        CurrencyPresets: built-in presets (classic, decimal, lsd)
+  apps/
+    currency-config.mjs         CurrencyConfig: ApplicationV2 GM dialog
+lang/                           en.json, de.json
+styles/                         module CSS
+templates/                      Handlebars templates
+tests/                          node:test unit tests for pure logic
 ```
+
+### Data conventions
+
+- Denomination `label`/`abbreviation` and the currency `name` may hold **i18n keys**
+  (presets do) or plain text (after the GM edits them). Always pass them through
+  `game.i18n.localize` when displaying; `localize` returns plain text unchanged.
+- `factor` = value of one unit in base units. Exactly one denomination has factor 1;
+  factors are unique integers. Enforced in `CurrencyDefinition.validateJoint`.
+- Default world currency is the `classic` preset (1/10/100/1000), i.e. the same
+  rates the store's "smart" mode assumes.
+- Custom hook `daggerheart-currency.currencyChanged` fires with the new definition.
 
 ## Upstream reference points (Foundryborne)
 
@@ -88,7 +108,7 @@ templates/           Handlebars templates (added as needed)
 ## Roadmap
 
 1. ~~Scaffold~~ (module.json, entry point, i18n, CLAUDE.md)
-2. Currency definition: world setting (DataModel) + ApplicationV2 config dialog, presets
+2. ~~Currency definition~~: world setting (DataModel) + ApplicationV2 config dialog, presets
 3. Sheet display: override `gold.hbs` partial, split view + per-denomination input
 4. Environment checks: warn GM if system homebrew / store mode are not set up as required
 5. Migration of existing handfuls/bags/chests into the ledger
@@ -97,7 +117,9 @@ templates/           Handlebars templates (added as needed)
 
 ## Testing
 
-No automated test harness yet. Manual test in a v14 world with the Daggerheart
-system: enable module, reload, check console for `daggerheart-currency |` logs.
-Pure logic (conversion/formatting) must stay free of Foundry globals so it can
-get unit tests later.
+- Unit tests: `npm test` (Node ≥ 20, built-in `node:test`, no dependencies).
+  Covers everything in `scripts/currency/currency-math.mjs`. Pure logic must stay
+  free of Foundry globals so it remains testable this way; add tests with every change there.
+- Manual test in a v14 world with the Daggerheart system: enable module, reload,
+  check console for `daggerheart-currency |` logs; GM: Settings → Module Settings →
+  "Configure currency". API in the console: `game.modules.get("daggerheart-currency").api.format(2347)`.

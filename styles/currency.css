@@ -1,1 +1,26 @@
 /* daggerheart-currency – all selectors are scoped with the dh-currency prefix. */
+
+.dh-currency-config__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 0.5rem;
+}
+
+.dh-currency-config__table th {
+  text-align: start;
+  font-weight: normal;
+  opacity: 0.8;
+}
+
+.dh-currency-config__table td {
+  padding: 0.125rem 0.25rem;
+}
+
+.dh-currency-config__table input[type="number"] {
+  width: 6rem;
+}
+
+.dh-currency-config__preview {
+  width: 2rem;
+  text-align: center;
+}

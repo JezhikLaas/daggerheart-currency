@@ -1,0 +1,69 @@
+<div class="dh-currency-config__root">
+<section class="dh-currency-config__body">
+  <p class="hint">{{localize "DH_CURRENCY.Config.intro"}}</p>
+
+  <div class="form-group">
+    <label for="dh-currency-name">{{localize "DH_CURRENCY.Config.name"}}</label>
+    <div class="form-fields">
+      <input id="dh-currency-name" type="text" name="name" value="{{name}}" required>
+    </div>
+    <p class="hint">{{localize "DH_CURRENCY.Config.nameHint"}}</p>
+  </div>
+
+  <div class="form-group">
+    <label for="dh-currency-preset">{{localize "DH_CURRENCY.Config.preset"}}</label>
+    <div class="form-fields">
+      <select id="dh-currency-preset" name="preset">
+        {{selectOptions presets valueAttr="value" labelAttr="label" localize=true}}
+      </select>
+      <button type="button" data-action="applyPreset">
+        <i class="fa-solid fa-wand-magic-sparkles" inert></i> {{localize "DH_CURRENCY.Config.applyPreset"}}
+      </button>
+    </div>
+  </div>
+
+  <table class="dh-currency-config__table">
+    <thead>
+      <tr>
+        <th class="dh-currency-config__preview"></th>
+        <th>{{localize "DH_CURRENCY.Config.label"}}</th>
+        <th>{{localize "DH_CURRENCY.Config.abbreviation"}}</th>
+        <th>{{localize "DH_CURRENCY.Config.icon"}}</th>
+        <th>{{localize "DH_CURRENCY.Config.factor"}}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each denominations as |d|}}
+        <tr>
+          <td class="dh-currency-config__preview">
+            <i class="{{d.icon}}" inert></i>
+            <input type="hidden" name="denominations.{{d.index}}.id" value="{{d.id}}">
+          </td>
+          <td><input type="text" name="denominations.{{d.index}}.label" value="{{d.label}}" required></td>
+          <td><input type="text" name="denominations.{{d.index}}.abbreviation" value="{{d.abbreviation}}" maxlength="6"></td>
+          <td><input type="text" name="denominations.{{d.index}}.icon" value="{{d.icon}}" placeholder="fa-solid fa-coins"></td>
+          <td><input type="number" name="denominations.{{d.index}}.factor" value="{{d.factor}}" min="1" step="1" required></td>
+          <td>
+            <button type="button" class="icon fa-solid fa-trash" data-action="removeDenomination" data-index="{{d.index}}"
+                    data-tooltip="DH_CURRENCY.Config.remove" aria-label="{{localize 'DH_CURRENCY.Config.remove'}}"
+                    {{disabled (not @root.canRemove)}}></button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p class="hint">{{localize "DH_CURRENCY.Config.factorHint"}}</p>
+
+  <button type="button" data-action="addDenomination" {{disabled (not canAdd)}}>
+    <i class="fa-solid fa-plus" inert></i> {{localize "DH_CURRENCY.Config.add" max=maxDenominations}}
+  </button>
+</section>
+
+<footer class="form-footer">
+  <button type="button" data-action="save">
+    <i class="fa-solid fa-floppy-disk" inert></i> {{localize "DH_CURRENCY.Config.save"}}
+  </button>
+</footer>
+</div>

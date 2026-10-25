@@ -27,5 +27,21 @@ export const UPSTREAM = Object.freeze({
   STORE_REQUIRED_MODE: "disabled"
 });
 
-/** Keys of this module's settings (filled as features are added). */
-export const SETTINGS = Object.freeze({});
+/** Keys of this module's settings. */
+export const SETTINGS = Object.freeze({
+  /** World setting holding the CurrencyDefinition. */
+  CURRENCY: "currency",
+  /** Settings menu opening the currency config dialog. */
+  CURRENCY_MENU: "currencyMenu"
+});
+
+/** Custom hooks fired by this module. */
+export const HOOKS = Object.freeze({
+  /** Fired with the new CurrencyDefinition after the world currency changed. */
+  CURRENCY_CHANGED: `${MODULE_ID}.currencyChanged`
+});
+
+/** Template paths. */
+export const TEMPLATES = Object.freeze({
+  CURRENCY_CONFIG: `modules/${MODULE_ID}/templates/currency-config.hbs`
+});
