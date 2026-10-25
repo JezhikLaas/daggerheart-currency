@@ -24,3 +24,36 @@
   width: 2rem;
   text-align: center;
 }
+
+/* Wallet in character / party sheets. Extra class for specificity over the system's .gold-section grid. */
+.tab.inventory .gold-section.dh-currency-wallet {
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  align-items: end;
+}
+
+.dh-currency-wallet__total {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.dh-currency-wallet__total .drag-handle {
+  cursor: grab;
+}
+
+.dh-currency-wallet__formatted {
+  font-weight: bold;
+}
+
+.dh-currency-wallet__denomination {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.dh-currency-wallet__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

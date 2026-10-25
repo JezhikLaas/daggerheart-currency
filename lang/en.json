@@ -37,23 +37,59 @@
     "Presets": {
       "classic": {
         "name": "Daggerheart (rules)",
-        "chest": { "label": "Chests", "abbreviation": "Ch" },
-        "bag": { "label": "Bags", "abbreviation": "B" },
-        "handful": { "label": "Handfuls", "abbreviation": "H" },
-        "coin": { "label": "Coins", "abbreviation": "C" }
+        "chest": {
+          "label": "Chests",
+          "abbreviation": "Ch"
+        },
+        "bag": {
+          "label": "Bags",
+          "abbreviation": "B"
+        },
+        "handful": {
+          "label": "Handfuls",
+          "abbreviation": "H"
+        },
+        "coin": {
+          "label": "Coins",
+          "abbreviation": "C"
+        }
       },
       "decimal": {
         "name": "Gold / Silver / Copper",
-        "gold": { "label": "Gold", "abbreviation": "g" },
-        "silver": { "label": "Silver", "abbreviation": "s" },
-        "copper": { "label": "Copper", "abbreviation": "c" }
+        "gold": {
+          "label": "Gold",
+          "abbreviation": "g"
+        },
+        "silver": {
+          "label": "Silver",
+          "abbreviation": "s"
+        },
+        "copper": {
+          "label": "Copper",
+          "abbreviation": "c"
+        }
       },
       "lsd": {
         "name": "Pound / Shilling / Penny",
-        "pound": { "label": "Pounds", "abbreviation": "£" },
-        "shilling": { "label": "Shillings", "abbreviation": "s" },
-        "penny": { "label": "Pence", "abbreviation": "d" }
+        "pound": {
+          "label": "Pounds",
+          "abbreviation": "£"
+        },
+        "shilling": {
+          "label": "Shillings",
+          "abbreviation": "s"
+        },
+        "penny": {
+          "label": "Pence",
+          "abbreviation": "d"
+        }
       }
+    },
+    "Wallet": {
+      "dragHint": "Drag onto another character or the party sheet to hand over money (amount in base units).",
+      "inputHint": "Enter a number, or +n / -n to add or remove. Missing amounts are changed from higher denominations automatically.",
+      "invalidInput": "Please enter a whole number, optionally with + or -.",
+      "insufficientFunds": "Not enough money."
     }
   }
 }

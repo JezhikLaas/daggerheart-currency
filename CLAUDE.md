@@ -78,6 +78,9 @@ scripts/
     currency-presets.mjs        CurrencyPresets: built-in presets (classic, decimal, lsd)
   apps/
     currency-config.mjs         CurrencyConfig: ApplicationV2 GM dialog
+  sheet/
+    wallet-view.mjs             WalletView: builds the wallet render context
+    sheet-integration.mjs       SheetIntegration: partial override + input handling
 lang/                           en.json, de.json
 styles/                         module CSS
 templates/                      Handlebars templates
@@ -105,11 +108,27 @@ tests/                          node:test unit tests for pure logic
   `module/applications/sheets/api/base-actor.mjs` (`inventory.currencies`).
 - Currency drag & drop: `.currency[data-currency]` → `system.gold[key]`.
 
+## Sheet integration (how the wallet works)
+
+- `templates/wallet.hbs` is registered **under the system's partial name**
+  (`UPSTREAM.GOLD_PARTIAL`) in `ready`, after awaiting the system's own copy.
+  The system only renders it when `inventory.hasCurrency` is true, i.e. when
+  the `coins` currency is enabled in the system homebrew settings.
+- The partial gets `currencies=inventory.currencies`; the helper
+  `dhCurrencyWallet` turns `currencies.coins` into the wallet context.
+- The ledger is a hidden input `name="system.gold.coins"`. Denomination inputs
+  have **no name**; a capture-phase `change` listener on the sheet element
+  rewrites the hidden input, then the sheet's own submit-on-change persists it.
+  Invalid input / negative totals: value reset, event stopped, warning shown.
+- `.currency[data-currency="coins"] .drag-handle` is kept so the system's
+  currency drag & drop works (transfers base units).
+- Known limitation: the system's transfer dialog shows the amount in base units.
+
 ## Roadmap
 
 1. ~~Scaffold~~ (module.json, entry point, i18n, CLAUDE.md)
 2. ~~Currency definition~~: world setting (DataModel) + ApplicationV2 config dialog, presets
-3. Sheet display: override `gold.hbs` partial, split view + per-denomination input
+3. ~~Sheet display~~: override `gold.hbs` partial, split view + per-denomination input
 4. Environment checks: warn GM if system homebrew / store mode are not set up as required
 5. Migration of existing handfuls/bags/chests into the ledger
 6. Store polish (price multiplier guidance, possible upstream PR for price formatting)

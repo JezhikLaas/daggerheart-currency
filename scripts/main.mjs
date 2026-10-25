@@ -7,6 +7,7 @@ import { Logger } from "./logger.mjs";
 import { ModuleSettings } from "./settings.mjs";
 import { CurrencyMath } from "./currency/currency-math.mjs";
 import { CurrencyPresets } from "./currency/currency-presets.mjs";
+import { SheetIntegration } from "./sheet/sheet-integration.mjs";
 
 /**
  * Public API, exposed as `game.modules.get("daggerheart-currency").api`.
@@ -44,11 +45,13 @@ Hooks.once("init", () => {
   }
 
   ModuleSettings.register();
+  SheetIntegration.init();
   game.modules.get(MODULE_ID).api = new CurrencyApi();
   Logger.info("Initialized.");
 });
 
-Hooks.once("ready", () => {
+Hooks.once("ready", async () => {
   if (!isSupportedSystem()) return;
+  await SheetIntegration.ready();
   Logger.info(`Ready (system ${game.system.version}, currency "${game.i18n.localize(ModuleSettings.currency.name)}").`);
 });

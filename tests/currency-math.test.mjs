@@ -66,3 +66,20 @@ describe("CurrencyMath.format", () => {
     assert.equal(CurrencyMath.format(1, decimal, { localize: t => `[${t}]` }), "1 [K]");
   });
 });
+
+describe("CurrencyMath.parseAmountInput", () => {
+  it("parses absolute values", () => {
+    assert.equal(CurrencyMath.parseAmountInput("5", 2), 5);
+    assert.equal(CurrencyMath.parseAmountInput(" 0 ", 2), 0);
+  });
+  it("parses relative values, allowing negative results", () => {
+    assert.equal(CurrencyMath.parseAmountInput("+3", 2), 5);
+    assert.equal(CurrencyMath.parseAmountInput("-3", 2), -1);
+    assert.equal(CurrencyMath.parseAmountInput("- 1", 2), 1);
+  });
+  it("rejects anything that is not a whole number", () => {
+    for (const raw of ["", "abc", "1.5", "+", "3+", "1e3"]) {
+      assert.equal(CurrencyMath.parseAmountInput(raw, 2), null, raw);
+    }
+  });
+});

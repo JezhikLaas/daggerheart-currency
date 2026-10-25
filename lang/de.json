@@ -37,23 +37,59 @@
     "Presets": {
       "classic": {
         "name": "Daggerheart (Regelwerk)",
-        "chest": { "label": "Truhen", "abbreviation": "T" },
-        "bag": { "label": "Beutel", "abbreviation": "B" },
-        "handful": { "label": "Handvoll", "abbreviation": "H" },
-        "coin": { "label": "Münzen", "abbreviation": "M" }
+        "chest": {
+          "label": "Truhen",
+          "abbreviation": "T"
+        },
+        "bag": {
+          "label": "Beutel",
+          "abbreviation": "B"
+        },
+        "handful": {
+          "label": "Handvoll",
+          "abbreviation": "H"
+        },
+        "coin": {
+          "label": "Münzen",
+          "abbreviation": "M"
+        }
       },
       "decimal": {
         "name": "Gold / Silber / Kupfer",
-        "gold": { "label": "Gold", "abbreviation": "G" },
-        "silver": { "label": "Silber", "abbreviation": "S" },
-        "copper": { "label": "Kupfer", "abbreviation": "K" }
+        "gold": {
+          "label": "Gold",
+          "abbreviation": "G"
+        },
+        "silver": {
+          "label": "Silber",
+          "abbreviation": "S"
+        },
+        "copper": {
+          "label": "Kupfer",
+          "abbreviation": "K"
+        }
       },
       "lsd": {
         "name": "Pfund / Schilling / Penny",
-        "pound": { "label": "Pfund", "abbreviation": "£" },
-        "shilling": { "label": "Schilling", "abbreviation": "s" },
-        "penny": { "label": "Pence", "abbreviation": "d" }
+        "pound": {
+          "label": "Pfund",
+          "abbreviation": "£"
+        },
+        "shilling": {
+          "label": "Schilling",
+          "abbreviation": "s"
+        },
+        "penny": {
+          "label": "Pence",
+          "abbreviation": "d"
+        }
       }
+    },
+    "Wallet": {
+      "dragHint": "Auf einen anderen Charakter oder den Gruppenbogen ziehen, um Geld zu übergeben (Betrag in Basiseinheiten).",
+      "inputHint": "Zahl eingeben, oder +n / -n zum Hinzufügen bzw. Abziehen. Fehlende Beträge werden automatisch aus höheren Stufen gewechselt.",
+      "invalidInput": "Bitte eine ganze Zahl eingeben, optional mit + oder -.",
+      "insufficientFunds": "Nicht genug Geld."
     }
   }
 }

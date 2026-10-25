@@ -15,6 +15,10 @@ export const UPSTREAM = Object.freeze({
   SYSTEM_ID: "daggerheart",
   /** Key of the system's homebrew world setting. */
   SYSTEM_HOMEBREW_SETTING: "Homebrew",
+  /** System partial that renders the currency block; overridden by our wallet. */
+  GOLD_PARTIAL: "systems/daggerheart/templates/sheets/global/partials/gold.hbs",
+  /** Actor types whose sheets show the currency block. */
+  WALLET_ACTOR_TYPES: Object.freeze(["character", "party"]),
   /** The single system gold field we use as ledger (value in base units). */
   LEDGER_PATH: "system.gold.coins",
   /** Gold keys of the system schema that this module does not use. */
@@ -43,5 +47,6 @@ export const HOOKS = Object.freeze({
 
 /** Template paths. */
 export const TEMPLATES = Object.freeze({
-  CURRENCY_CONFIG: `modules/${MODULE_ID}/templates/currency-config.hbs`
+  CURRENCY_CONFIG: `modules/${MODULE_ID}/templates/currency-config.hbs`,
+  WALLET: `modules/${MODULE_ID}/templates/wallet.hbs`
 });
