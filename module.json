@@ -13,6 +13,7 @@
       "name": "Jözhik"
     }
   ],
+  "license": "LICENSE",
   "relationships": {
     "systems": [
       {

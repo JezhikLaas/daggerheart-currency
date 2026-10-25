@@ -54,7 +54,7 @@ In Foundry's setup screen: **Add-on Modules → Install Module**, paste the mani
 of the latest release into the field at the bottom and click **Install**:
 
 ```
-https://github.com/OWNER/daggerheart-currency/releases/latest/download/module.json
+https://github.com/JezhikLaas/daggerheart-currency/releases/latest/download/module.json
 ```
 
 Then enable **Daggerheart: Campaign Currency** in your world.
@@ -155,7 +155,7 @@ Hooks:
 No build step, no runtime dependencies – plain ES modules.
 
 ```bash
-git clone https://github.com/OWNER/daggerheart-currency.git
+git clone https://github.com/JezhikLaas/daggerheart-currency.git
 ln -s "$PWD/daggerheart-currency" <FoundryData>/Data/modules/daggerheart-currency
 npm test        # unit tests for the pure currency logic (Node ≥ 20)
 ```
@@ -175,3 +175,7 @@ tests, writes version and URLs into `module.json` and attaches `module.json` and
 - [Mestre Digital / brunocalado](https://github.com/brunocalado/daggerheart-store) for Daggerheart: Store.
 
 Daggerheart is a trademark of Darrington Press. This is an unofficial fan project.
+
+## License
+
+[MIT](LICENSE) © 2026 Jözhik
