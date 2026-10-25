@@ -1,0 +1,24 @@
+{{!--
+  Replaces systems/daggerheart/templates/sheets/global/partials/gold.hbs.
+  Called by the system as: {{> gold.hbs currencies=inventory.currencies}}
+  Keeps .currency[data-currency] .drag-handle so the system's currency drag & drop still works.
+--}}
+<div class="gold-section dh-currency-wallet">
+  {{#with (dhCurrencyWallet currencies.coins) as |wallet|}}
+    <div class="input currency dh-currency-wallet__total" data-currency="coins">
+      <span class="drag-handle" data-tooltip="DH_CURRENCY.Wallet.dragHint">
+        <i class="{{wallet.icon}}" inert></i> {{wallet.name}}
+      </span>
+      <span class="dh-currency-wallet__formatted">{{wallet.formatted}}</span>
+      <input type="hidden" name="{{wallet.fieldPath}}" value="{{wallet.total}}" data-dtype="Number" data-dh-currency-ledger>
+    </div>
+    {{#each wallet.parts as |part|}}
+      <label class="input dh-currency-wallet__denomination">
+        <span class="dh-currency-wallet__label"><i class="{{part.icon}}" inert></i> {{part.label}}</span>
+        <input type="text" inputmode="numeric" class="dh-currency-wallet__amount"
+               data-denomination="{{part.id}}" data-amount="{{part.amount}}" value="{{part.amount}}"
+               data-tooltip="DH_CURRENCY.Wallet.inputHint" {{disabled (not @root.editable)}}>
+      </label>
+    {{/each}}
+  {{/with}}
+</div>

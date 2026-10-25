@@ -120,12 +120,12 @@
         },
         "legacyWealth": {
           "title": "Kein Geld mehr in Handvoll, Beuteln oder Truhen",
-          "detail": "{count} Akteur(e) haben noch Geld in den alten Stufen, das dieses Modul nicht anzeigt: {names}. Eine Migration folgt in der nächsten Version."
+          "detail": "{count} Akteur(e) haben noch Geld in den alten Stufen, das dieses Modul nicht anzeigt: {names}. „Korrigieren“ öffnet die Umstellung."
         },
         "legacyTiersDisabled": {
           "title": "Handvoll, Beutel und Truhen im System deaktiviert",
           "detail": "Diese Stufen nutzt das Modul nicht, sie sollten deaktiviert sein.",
-          "blocked": "Erst deaktivierbar, wenn niemand mehr Geld darin hat (siehe oben)."
+          "blocked": "Erst deaktivierbar, wenn niemand mehr Geld darin hat (zuerst umstellen, siehe oben)."
         },
         "labelsSynced": {
           "title": "Systemnamen passen zur Weltwährung",
@@ -137,6 +137,19 @@
           "inactive": "Daggerheart: Store ist nicht aktiv."
         }
       }
+    },
+    "Migration": {
+      "title": "Alte Währung übernehmen",
+      "intro": "Rechnet Geld in Handvoll, Beuteln und Truhen in die Weltwährung um. Die bisherigen Werte bleiben an jedem Akteur als Sicherung erhalten.",
+      "rates": "Wert in {base}",
+      "coinHint": "Den Wert der Münze nur dann ungleich 1 setzen, wenn das Münzfeld noch Regel-Münzen enthält, also bevor jemand die neue Geldbörse benutzt hat.",
+      "invalidRates": "Alle Werte müssen ganze Zahlen ab 1 sein.",
+      "nothingToDo": "Kein Akteur muss umgestellt werden.",
+      "disableLegacyTiers": "Danach Handvoll, Beutel und Truhen im System deaktivieren",
+      "migrate": "{count} Akteur(e) umstellen",
+      "confirm": "Das Geld von {count} Akteur(en) umstellen? An jedem Akteur wird eine Sicherung der bisherigen Werte gespeichert.",
+      "done": "{count} Akteur(e) umgestellt.",
+      "failed": "Umstellung fehlgeschlagen: {error}"
     }
   }
 }

@@ -1,0 +1,16 @@
+<section class="dh-currency-migration__rates">
+  <p class="hint">{{localize "DH_CURRENCY.Migration.intro"}}</p>
+  <fieldset>
+    <legend>{{localize "DH_CURRENCY.Migration.rates" base=baseLabel}}</legend>
+    {{#each rates as |rate|}}
+      <div class="form-group">
+        <label for="dh-currency-rate-{{rate.key}}">1 {{rate.label}} =</label>
+        <div class="form-fields">
+          <input id="dh-currency-rate-{{rate.key}}" type="number" name="rates.{{rate.key}}" value="{{rate.value}}" min="1" step="1" required>
+          <span class="units">{{@root.baseLabel}}</span>
+        </div>
+      </div>
+    {{/each}}
+    <p class="hint">{{localize "DH_CURRENCY.Migration.coinHint"}}</p>
+  </fieldset>
+</section>

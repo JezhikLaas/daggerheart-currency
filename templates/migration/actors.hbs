@@ -1,0 +1,23 @@
+<section class="dh-currency-migration__preview">
+  {{#if ratesError}}
+    <p class="notification error">{{ratesError}}</p>
+  {{else}}
+    <p class="dh-currency-migration__summary">
+      {{#each rateSummary as |rate|}}<span>1 {{rate.label}} = {{rate.value}}</span>{{/each}}
+    </p>
+    {{#if entries.length}}
+      <ul class="dh-currency-migration__actors">
+        {{#each entries as |entry|}}
+          <li class="dh-currency-migration__actor">
+            <input type="checkbox" name="actors.{{entry.id}}" {{checked entry.selected}} aria-label="{{entry.name}}">
+            <img src="{{entry.img}}" alt="">
+            <span class="dh-currency-migration__name">{{entry.name}}</span>
+            <span class="dh-currency-migration__change">{{entry.before}} <i class="fa-solid fa-arrow-right" inert></i> {{entry.after}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <p>{{localize "DH_CURRENCY.Migration.nothingToDo"}}</p>
+    {{/if}}
+  {{/if}}
+</section>

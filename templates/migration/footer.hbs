@@ -1,0 +1,9 @@
+<footer class="form-footer dh-currency-migration__footer">
+  <label class="checkbox">
+    <input type="checkbox" name="disableLegacyTiers" {{checked disableLegacyTiers}}>
+    {{localize "DH_CURRENCY.Migration.disableLegacyTiers"}}
+  </label>
+  <button type="button" data-action="migrate" {{disabled (or ratesError (not selectedCount))}}>
+    <i class="fa-solid fa-right-left" inert></i> {{localize "DH_CURRENCY.Migration.migrate" count=selectedCount}}
+  </button>
+</footer>

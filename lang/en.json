@@ -120,12 +120,12 @@
         },
         "legacyWealth": {
           "title": "No money left in handfuls, bags or chests",
-          "detail": "{count} actor(s) still hold money in the old tiers, which this module does not show: {names}. A migration follows in the next version."
+          "detail": "{count} actor(s) still hold money in the old tiers, which this module does not show: {names}. \"Fix\" opens the migration."
         },
         "legacyTiersDisabled": {
           "title": "Handfuls, bags and chests disabled in the system",
           "detail": "These tiers are not used by this module and should be disabled.",
-          "blocked": "Can only be disabled once nobody holds money in them any more (see above)."
+          "blocked": "Can only be disabled once nobody holds money in them any more (migrate first, see above)."
         },
         "labelsSynced": {
           "title": "System names match the world currency",
@@ -137,6 +137,19 @@
           "inactive": "Daggerheart: Store is not active."
         }
       }
+    },
+    "Migration": {
+      "title": "Migrate old currency",
+      "intro": "Converts money held in handfuls, bags and chests into the world currency. The previous values are kept as a backup on each actor.",
+      "rates": "Value in {base}",
+      "coinHint": "Only set the coin value to something other than 1 if the coin field still holds rule coins, i.e. before anyone used the new wallet.",
+      "invalidRates": "All values must be whole numbers of at least 1.",
+      "nothingToDo": "No actor needs to be migrated.",
+      "disableLegacyTiers": "Then disable handfuls, bags and chests in the system",
+      "migrate": "Migrate {count} actor(s)",
+      "confirm": "Migrate the money of {count} actor(s)? A backup of the previous values is stored on each actor.",
+      "done": "Migrated {count} actor(s).",
+      "failed": "Migration failed: {error}"
     }
   }
 }

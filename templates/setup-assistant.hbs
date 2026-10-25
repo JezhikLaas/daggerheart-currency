@@ -1,0 +1,38 @@
+<div class="dh-currency-setup__root">
+  <p class="hint">{{localize "DH_CURRENCY.Setup.intro"}}</p>
+
+  <ul class="dh-currency-setup__list">
+    {{#each checks as |check|}}
+      <li class="dh-currency-setup__check dh-currency-setup__check--{{check.status}}">
+        <i class="dh-currency-setup__icon {{check.icon}}" inert></i>
+        <div class="dh-currency-setup__text">
+          <strong>{{check.title}}</strong>
+          {{#if check.detail}}<p>{{check.detail}}</p>{{/if}}
+        </div>
+        {{#if check.fixable}}
+          <button type="button" data-action="fix" data-check="{{check.id}}">
+            <i class="fa-solid fa-wrench" inert></i> {{localize "DH_CURRENCY.Setup.fix"}}
+          </button>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+
+  {{#if allOk}}
+    <p class="dh-currency-setup__summary">{{localize "DH_CURRENCY.Setup.allOk"}}</p>
+  {{/if}}
+
+  <label class="checkbox">
+    <input type="checkbox" data-action="toggleStartupCheck" {{checked startupCheck}}>
+    {{localize "DH_CURRENCY.Setup.startupCheck"}}
+  </label>
+
+  <footer class="form-footer">
+    <button type="button" data-action="refresh">
+      <i class="fa-solid fa-rotate" inert></i> {{localize "DH_CURRENCY.Setup.refresh"}}
+    </button>
+    <button type="button" data-action="fixAll" {{disabled (not anyFixable)}}>
+      <i class="fa-solid fa-wand-magic-sparkles" inert></i> {{localize "DH_CURRENCY.Setup.fixAll"}}
+    </button>
+  </footer>
+</div>

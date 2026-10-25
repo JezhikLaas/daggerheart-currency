@@ -10,6 +10,8 @@ import { CurrencyPresets } from "./currency/currency-presets.mjs";
 import { SheetIntegration } from "./sheet/sheet-integration.mjs";
 import { SetupChecks } from "./setup/setup-checks.mjs";
 import { SetupAssistant } from "./apps/setup-assistant.mjs";
+import { LegacyMigrationApp } from "./apps/legacy-migration-app.mjs";
+import { LegacyMigration } from "./migration/legacy-migration.mjs";
 
 /**
  * Public API, exposed as `game.modules.get("daggerheart-currency").api`.
@@ -24,6 +26,21 @@ class CurrencyApi {
   /** Open the setup assistant (GM). */
   openSetupAssistant() {
     return new SetupAssistant().render({ force: true });
+  }
+
+  /** Open the legacy gold migration dialog (GM). */
+  openMigration() {
+    return new LegacyMigrationApp().render({ force: true });
+  }
+
+  /**
+   * Undo the legacy migration for one actor (restores all four gold fields
+   * from the backup flag; ledger changes made since then are lost).
+   * @param {Actor} actor
+   * @returns {Promise<boolean>}  Whether a backup existed.
+   */
+  restoreLegacyGold(actor) {
+    return LegacyMigration.restore(actor);
   }
 
   /** @returns {import("./currency/currency-definition.mjs").CurrencyDefinition} The world currency. */

@@ -46,12 +46,23 @@ export const SETTINGS = Object.freeze({
 /** Custom hooks fired by this module. */
 export const HOOKS = Object.freeze({
   /** Fired with the new CurrencyDefinition after the world currency changed. */
-  CURRENCY_CHANGED: `${MODULE_ID}.currencyChanged`
+  CURRENCY_CHANGED: `${MODULE_ID}.currencyChanged`,
+  /** Fired with the number of migrated actors after a legacy gold migration. */
+  LEGACY_MIGRATED: `${MODULE_ID}.legacyMigrated`
+});
+
+/** Keys of actor flags (below `flags.daggerheart-currency`). */
+export const FLAGS = Object.freeze({
+  /** Gold fields and rates before the legacy migration, for restore. */
+  LEGACY_BACKUP: "legacyBackup"
 });
 
 /** Template paths. */
 export const TEMPLATES = Object.freeze({
   CURRENCY_CONFIG: `modules/${MODULE_ID}/templates/currency-config.hbs`,
   WALLET: `modules/${MODULE_ID}/templates/wallet.hbs`,
-  SETUP_ASSISTANT: `modules/${MODULE_ID}/templates/setup-assistant.hbs`
+  SETUP_ASSISTANT: `modules/${MODULE_ID}/templates/setup-assistant.hbs`,
+  MIGRATION_RATES: `modules/${MODULE_ID}/templates/migration/rates.hbs`,
+  MIGRATION_ACTORS: `modules/${MODULE_ID}/templates/migration/actors.hbs`,
+  MIGRATION_FOOTER: `modules/${MODULE_ID}/templates/migration/footer.hbs`
 });

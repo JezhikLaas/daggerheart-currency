@@ -79,6 +79,10 @@ scripts/
   apps/
     currency-config.mjs         CurrencyConfig: ApplicationV2 GM dialog
     setup-assistant.mjs         SetupAssistant: ApplicationV2 showing checks + fixes
+    legacy-migration-app.mjs    LegacyMigrationApp: ApplicationV2 for the legacy gold migration
+  migration/
+    legacy-conversion.mjs       LegacyConversion: pure 4-field → ledger math (unit tested)
+    legacy-migration.mjs        LegacyMigration: plan / execute / restore on actors
   setup/
     upstream-settings.mjs       UpstreamSettings: the ONLY place touching system/store settings
     legacy-wealth.mjs           LegacyWealth: finds money left in handfuls/bags/chests
@@ -141,13 +145,26 @@ tests/                          node:test unit tests for pure logic
   base denomination) runs automatically after the GM changes the currency.
 - Legacy tiers are only disabled once no world actor holds money in them.
 
+## Legacy migration
+
+- Rates = value of one coin/handful/bag/chest in base units (integers ≥ 1),
+  default 1/10/100/1000. A coin rate ≠ 1 also rescales `coins` – only correct
+  before the wallet has been used (the dialog says so).
+- `execute` writes ledger + zeroes the old fields in one `updateDocuments` call and
+  stores `flags.daggerheart-currency.legacyBackup = {gold, rates, migratedAt}`.
+  `api.restoreLegacyGold(actor)` restores from it.
+- Old tiers are disabled in the system only if no world actor holds money there afterwards.
+- Unlinked token actors and compendium actors are not migrated.
+- The `rates` part is not re-rendered on change (keeps focus); everything derived
+  from the rates is in the `actors` part.
+
 ## Roadmap
 
 1. ~~Scaffold~~ (module.json, entry point, i18n, CLAUDE.md)
 2. ~~Currency definition~~: world setting (DataModel) + ApplicationV2 config dialog, presets
 3. ~~Sheet display~~: override `gold.hbs` partial, split view + per-denomination input
 4. ~~Environment checks~~: warn GM if system homebrew / store mode are not set up as required
-5. Migration of existing handfuls/bags/chests into the ledger
+5. ~~Migration~~ of existing handfuls/bags/chests into the ledger
 6. Store polish (price multiplier guidance, possible upstream PR for price formatting)
 7. Later: multiple regional currencies (stored in actor flags)
 
