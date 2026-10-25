@@ -59,6 +59,9 @@ https://github.com/OWNER/daggerheart-currency/releases/latest/download/module.js
 
 Then enable **Daggerheart: Campaign Currency** in your world.
 
+## AI Info
+This module has been developed with the help of Claud Code.
+
 ## Getting started (GM)
 
 1. **Enable the module.** On the next start, the **setup assistant** opens if
