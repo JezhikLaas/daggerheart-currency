@@ -60,7 +60,7 @@ https://github.com/JezhikLaas/daggerheart-currency/releases/latest/download/modu
 Then enable **Daggerheart: Campaign Currency** in your world.
 
 ## AI Info
-This module has been developed with the help of Claud Code.
+This module has been developed with the help of Claude Code.
 
 ## Getting started (GM)
 
