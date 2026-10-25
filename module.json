@@ -1,0 +1,55 @@
+{
+  "id": "daggerheart-currency",
+  "title": "Daggerheart: Campaign Currency",
+  "description": "Replaces the fixed Daggerheart currency (coins, handfuls, bags, chests) with a per-world currency with any number of denominations and conversion rates.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.369",
+    "maximum": "14"
+  },
+  "authors": [
+    {
+      "name": "Jözhik"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "daggerheart",
+        "type": "system",
+        "compatibility": {
+          "minimum": "2.11.0"
+        }
+      }
+    ],
+    "recommends": [
+      {
+        "id": "daggerheart-store",
+        "type": "module",
+        "reason": "Works with the store when its currency mode is set to \"Disabled\"."
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/currency.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    }
+  ],
+  "url": "",
+  "manifest": "",
+  "download": ""
+}
