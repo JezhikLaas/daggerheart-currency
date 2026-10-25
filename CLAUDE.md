@@ -156,9 +156,9 @@ tests/                          node:test unit tests for pure logic
 
 ## Release
 
-- `.github/workflows/release.yml`: on a published GitHub release (tag `vX.Y.Z`) it runs
-  `npm test`, writes version/url/manifest/download into `module.json` via jq and
-  attaches `module.json` + `module.zip`. Keep `module.json` URLs empty in the repo.
+- `.github/workflows/release.yaml`: on a pushed tag `vX.Y.Z` it runs `npm test`,
+  writes version/url/manifest/download into `module.json` via jq, creates the GitHub
+  release and attaches `module.json` + `module.zip`. Keep `module.json` URLs empty in the repo.
 - Update `CHANGELOG.md` with every user-visible change.
 
 ## Legacy migration

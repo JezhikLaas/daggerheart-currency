@@ -1,10 +1,11 @@
-# Builds the release assets when a GitHub release is published (tag e.g. v0.2.0):
+# Creates a GitHub release when a version tag is pushed (e.g. v0.2.0):
 # runs the tests, writes version + URLs into module.json, attaches module.json and module.zip.
 name: Release
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "v*"
 
 permissions:
   contents: write
@@ -24,7 +25,7 @@ jobs:
 
       - name: Write version and URLs into module.json
         env:
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ github.ref_name }}
           REPO_URL: https://github.com/${{ github.repository }}
         run: |
           jq --arg version "${TAG#v}" --arg tag "$TAG" --arg repo "$REPO_URL" '
@@ -42,6 +43,9 @@ jobs:
 
       - uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
           files: |
             module.json
             module.zip
