@@ -12,6 +12,7 @@ import { SetupChecks } from "./setup/setup-checks.mjs";
 import { SetupAssistant } from "./apps/setup-assistant.mjs";
 import { LegacyMigrationApp } from "./apps/legacy-migration-app.mjs";
 import { LegacyMigration } from "./migration/legacy-migration.mjs";
+import { StorePriceFormatter } from "./integration/store-price-formatter.mjs";
 
 /**
  * Public API, exposed as `game.modules.get("daggerheart-currency").api`.
@@ -70,6 +71,7 @@ Hooks.once("init", () => {
 
   ModuleSettings.register();
   SheetIntegration.init();
+  if (game.modules.get(UPSTREAM.STORE_ID)?.active) StorePriceFormatter.register();
   Hooks.on(HOOKS.CURRENCY_CHANGED, () => {
     if (game.user.isActiveGM) SetupChecks.syncLabels().catch(err => Logger.error("Label sync failed.", err));
   });

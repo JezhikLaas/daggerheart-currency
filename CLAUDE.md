@@ -145,6 +145,18 @@ tests/                          node:test unit tests for pure logic
   base denomination) runs automatically after the GM changes the currency.
 - Legacy tiers are only disabled once no world actor holds money in them.
 
+## Store price display
+
+- `scripts/integration/store-price-formatter.mjs` listens to `daggerheart-store.formatPrice`
+  (store ≥ 0.7.0) and replaces `data.text` **synchronously** (no `await` before assigning).
+- `data.label === false` (number next to the store's coin icon) → abbreviations,
+  otherwise full names. Errors keep the store's default text.
+- `text` is inserted unescaped into the store's chat cards/dialogs: plain text only.
+  Therefore `CurrencyDefinition.validateJoint` rejects `<`/`>` in names, and the
+  formatter strips them as a second line of defense.
+- **Contract lives in the store's `docs/API.md`** – re-check it with every store release.
+- Setup check `storeVersion` warns when the store is older than `UPSTREAM.STORE_FORMAT_PRICE_MIN_VERSION`.
+
 ## Price scale
 
 - `CurrencyDefinition.ruleHandfulValue` = value of one rule handful in base units
@@ -181,7 +193,8 @@ tests/                          node:test unit tests for pure logic
 3. ~~Sheet display~~: override `gold.hbs` partial, split view + per-denomination input
 4. ~~Environment checks~~: warn GM if system homebrew / store mode are not set up as required
 5. ~~Migration~~ of existing handfuls/bags/chests into the ledger
-6. ~~Store polish~~: price scale (`ruleHandfulValue`) + store multiplier check. Open: upstream PR for price formatting
+6. ~~Store polish~~: price scale (`ruleHandfulValue`) + store multiplier check; price display via
+   the store's `formatPrice` hook (upstream added it in 0.7.0 after our issue)
 7. Later: multiple regional currencies (stored in actor flags)
 
 ## Testing

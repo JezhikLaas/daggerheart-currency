@@ -28,7 +28,10 @@
       {
         "id": "daggerheart-store",
         "type": "module",
-        "reason": "Works with the store when its currency mode is set to \"Disabled\"."
+        "reason": "Store prices and balances are shown in the world currency (store 0.7.0+, currency mode \"Disabled\").",
+        "compatibility": {
+          "minimum": "0.7.0"
+        }
       }
     ]
   },

@@ -44,7 +44,8 @@
       "TooManyDenominations": "A currency can have at most {max} denominations.",
       "NoBaseDenomination": "Exactly one denomination must have the value 1 (base unit).",
       "DuplicateFactor": "Two denominations have the same value.",
-      "DuplicateId": "Two denominations have the same id."
+      "DuplicateId": "Two denominations have the same id.",
+      "MarkupCharacters": "Denomination and currency names must not contain < or >."
     },
     "Presets": {
       "classic": {
@@ -142,6 +143,10 @@
         "storePriceScale": {
           "title": "Store prices match the price scale",
           "detail": "The store's price multiplier is {actual} %, the price scale of the world currency needs {expected} %. Prices you set manually per item are not changed."
+        },
+        "storeVersion": {
+          "title": "Store shows prices in your denominations",
+          "detail": "Daggerheart: Store {version} shows prices in the base unit only. Update it to {minimum} or newer to see e.g. \"1 Gold 2 Silver\"."
         }
       }
     },

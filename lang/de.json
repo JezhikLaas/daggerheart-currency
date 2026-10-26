@@ -44,7 +44,8 @@
       "TooManyDenominations": "Eine Währung kann höchstens {max} Stufen haben.",
       "NoBaseDenomination": "Genau eine Stufe muss den Wert 1 haben (Basiseinheit).",
       "DuplicateFactor": "Zwei Stufen haben denselben Wert.",
-      "DuplicateId": "Zwei Stufen haben dieselbe Id."
+      "DuplicateId": "Zwei Stufen haben dieselbe Id.",
+      "MarkupCharacters": "Namen von Währung und Stufen dürfen kein < oder > enthalten."
     },
     "Presets": {
       "classic": {
@@ -142,6 +143,10 @@
         "storePriceScale": {
           "title": "Store-Preise passen zur Preisskala",
           "detail": "Der Preis-Multiplikator des Stores steht auf {actual} %, die Preisskala der Weltwährung braucht {expected} %. Von Hand gesetzte Einzelpreise werden nicht verändert."
+        },
+        "storeVersion": {
+          "title": "Store zeigt Preise in deinen Stufen",
+          "detail": "Daggerheart: Store {version} zeigt Preise nur in der Basiseinheit. Aktualisiere auf {minimum} oder neuer, um z. B. „1 Gold 2 Silber“ zu sehen."
         }
       }
     },

@@ -46,6 +46,9 @@ export class CurrencyDefinition extends foundry.abstract.DataModel {
     if (!denominations.some(d => d.factor === 1)) throw error("NoBaseDenomination");
     if (new Set(denominations.map(d => d.factor)).size !== denominations.length) throw error("DuplicateFactor");
     if (new Set(denominations.map(d => d.id)).size !== denominations.length) throw error("DuplicateId");
+    // Texts end up unescaped in other modules' chat cards (e.g. the store), so no markup.
+    const texts = [data.name, ...denominations.flatMap(d => [d.label, d.abbreviation])];
+    if (texts.some(text => /[<>]/.test(text ?? ""))) throw error("MarkupCharacters");
   }
 
   /** @returns {import("./currency-math.mjs").Denomination[]} Denominations, highest factor first. */

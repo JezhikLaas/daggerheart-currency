@@ -46,6 +46,12 @@ export class UpstreamSettings {
       && game.settings.settings.has(`${UPSTREAM.STORE_ID}.${UPSTREAM.STORE_CURRENCY_MODE_SETTING}`);
   }
 
+  /** @returns {string|null} Installed version of the store, or null if the store is not active. */
+  static get storeVersion() {
+    const store = game.modules.get(UPSTREAM.STORE_ID);
+    return store?.active ? store.version : null;
+  }
+
   /** @returns {string|null} The store's currency mode, or null if the store is not active. */
   static get storeCurrencyMode() {
     if (!UpstreamSettings.storeActive) return null;

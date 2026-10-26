@@ -177,6 +177,19 @@ class StorePriceScaleCheck extends SetupCheck {
   }
 }
 
+/** Store ≥ 0.7.0 lets us show its prices in the world currency's denominations. */
+class StoreVersionCheck extends SetupCheck {
+  static id = "storeVersion";
+
+  static evaluate() {
+    const version = UpstreamSettings.storeVersion;
+    if (version === null) return { status: CHECK_STATUS.SKIPPED, detail: i18n("Checks.storeMode.inactive") };
+    const minimum = UPSTREAM.STORE_FORMAT_PRICE_MIN_VERSION;
+    if (!foundry.utils.isNewerVersion(minimum, version)) return { status: CHECK_STATUS.OK };
+    return { status: CHECK_STATUS.WARNING, detail: i18n("Checks.storeVersion.detail", { version, minimum }), fixable: false };
+  }
+}
+
 /**
  * Registry and runner for all checks.
  */
@@ -188,7 +201,8 @@ export class SetupChecks {
     LegacyTiersDisabledCheck,
     LabelsSyncedCheck,
     StoreModeCheck,
-    StorePriceScaleCheck
+    StorePriceScaleCheck,
+    StoreVersionCheck
   ]);
 
   /**

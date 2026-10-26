@@ -30,7 +30,11 @@ export const UPSTREAM = Object.freeze({
   /** Store currency mode required by this module. */
   STORE_REQUIRED_MODE: "disabled",
   /** Store setting: global price multiplier in percent (applied to its rule price list). */
-  STORE_PRICE_MODIFIER_SETTING: "priceModifier"
+  STORE_PRICE_MODIFIER_SETTING: "priceModifier",
+  /** Store hook for price/balance display text (store ≥ 0.7.0, see its docs/API.md). */
+  STORE_FORMAT_PRICE_HOOK: "daggerheart-store.formatPrice",
+  /** First store version that fires STORE_FORMAT_PRICE_HOOK. */
+  STORE_FORMAT_PRICE_MIN_VERSION: "0.7.0"
 });
 
 /** Keys of this module's settings. */

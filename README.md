@@ -33,7 +33,7 @@ without touching the system's data model.
   - you can't spend more than you have.
 - **Drag & drop** money to another character or the party sheet, as before.
 - **Price scale** – define what one rule “handful” is worth in your currency. The
-  Daggerheart Store's prices are scaled accordingly.
+  Daggerheart Store's prices are scaled accordingly and shown in your denominations.
 - **Setup assistant** – checks the system and store settings this module relies on
   and fixes them with one click.
 - **Migration** of existing handfuls, bags and chests into the new currency, with
@@ -46,7 +46,7 @@ without touching the system's data model.
 |---|---|
 | Foundry VTT | v14 |
 | [Daggerheart (Foundryborne)](https://github.com/Foundryborne/daggerheart) | 2.11 or newer |
-| [Daggerheart: Store](https://github.com/brunocalado/daggerheart-store) | optional, 0.6 or newer |
+| [Daggerheart: Store](https://github.com/brunocalado/daggerheart-store) | optional, 0.7 or newer |
 
 ## Installation
 
@@ -110,10 +110,13 @@ The module works with [Daggerheart: Store](https://github.com/brunocalado/dagger
 - the store's **currency mode** is *Disabled* – otherwise the store converts money with
   its own fixed 1/10/100/1000 rates,
 - the store's **price multiplier** matches your price scale,
-- the store shows your base unit's name (e.g. “40 Copper”).
+- the store shows your base unit's name where it asks for amounts (e.g. “Your Offer (Copper)”).
 
-Known limitation: the store shows prices in the base unit (“120 Pence”) rather than
-split into denominations (“10 s”). This needs a small change in the store itself.
+All prices and balances in the store – item lists, wealth, dialogs, negotiation and chat
+cards – are shown in your denominations: abbreviated next to the coin icon (“1 g 2 s”),
+spelled out elsewhere (“1 Gold 2 Silver”). This uses the store's `daggerheart-store.formatPrice`
+hook, available since store 0.7.0. Amounts you type in (offers, transfers, split payments)
+stay in the base unit.
 
 ## Known limitations
 
